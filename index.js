@@ -1,7 +1,11 @@
+
+
 async function fetchData() {
+  const code = 8;
+
   try {
     const response = await fetch(
-      "https://restcountries.com/v3.1/name/deutschland"
+      "https://restcountries.com/v3.1/independent?status=true"
     );
 
     if (!response.ok) {
@@ -9,7 +13,7 @@ async function fetchData() {
     }
 
     const data = await response.json();
-    console.log(data[0]);
+    console.log(data);
 
   } catch (err) {
     console.error(err);

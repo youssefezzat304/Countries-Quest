@@ -21,7 +21,7 @@ function App() {
   };
   return (
     <>
-      <NavBarr className="z-10" darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
+      <NavBarr darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       <Routes>
         <Route path="/" element={<Home darkMode={darkMode}/>} />
         <Route path="/info" element={<Info />} />
