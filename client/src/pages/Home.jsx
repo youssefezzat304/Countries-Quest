@@ -2,14 +2,23 @@ import React, { useEffect, useState } from "react";
 import { IoIosSearch, IoIosArrowDown } from "react-icons/io";
 import Card from "../components/Card";
 import { Link } from "react-router-dom";
+import { MoonLoader } from "react-spinners";
 
 const Home = ({ darkMode }) => {
   const [search, setSearch] = useState(""),
+    [loading, setLoading] = useState(false),
     [codeArray, setCodeArray] = useState([]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  }, []);
 
   useEffect(() => {
     const listOfNums = [];
@@ -28,6 +37,11 @@ const Home = ({ darkMode }) => {
   return (
     <section className={darkMode && "dark"}>
       <div className="min-h-lvh dark:bg-vd-blue px-20 pb-20 bg-vl-gray-lm shadow-inner">
+        {loading && (
+          <div className="flex min-h-[91.6vh] dark:bg-vd-blue px-20 pb-20 bg-vl-gray-lm shadow-inner items-center justify-center">
+            <MoonLoader />
+          </div>
+        )}
         {/* -----------------Search and List-------------------- */}
         <div className="flex justify-between  pt-10">
           <div className="w-full flex relative">
