@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { IoMoonSharp } from "react-icons/io5";
 
 const NavBarr = ({ darkMode, toggleDarkMode }) => {
@@ -6,7 +5,7 @@ const NavBarr = ({ darkMode, toggleDarkMode }) => {
 
   return (
     <section className={darkMode && "dark"}>
-      <div className="min-h-20 flex justify-between px-10 shadow-lg dark:bg-d-blue">
+      <div className="min-h-20 flex justify-between px-20 shadow-lg dark:bg-d-blue">
         <label className="text-vd-blue-lm content-center text-2xl font-semibold dark:text-white-txt">
           Where in the world?
         </label>
@@ -15,7 +14,7 @@ const NavBarr = ({ darkMode, toggleDarkMode }) => {
           onClick={() => toggleDarkMode()}
         >
           <IoMoonSharp className="self-center text-vd-blue-lm text-l dark:text-white-txt" />
-          <label className="text-vd-blue-lm content-center text-base font-light hover:cursor-pointer dark:text-white-txt ">
+          <label className="text-vd-blue-lm content-center text-base font-semibold hover:cursor-pointer dark:text-white-txt ">
             Dark Mode
           </label>
         </button>

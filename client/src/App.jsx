@@ -24,7 +24,7 @@ function App() {
       <NavBarr darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       <Routes>
         <Route path="/" element={<Home darkMode={darkMode}/>} />
-        <Route path="/info" element={<Info />} />
+        <Route path="info/:id" element={<Info darkMode={darkMode}/>} />
       </Routes>
     </>
   );

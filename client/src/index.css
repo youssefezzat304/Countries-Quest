@@ -5,4 +5,7 @@
 * {
   @apply transition-colors duration-150 font-Nunito
 }
+span {
+  @apply font-semibold dark:text-white-txt
+}
 

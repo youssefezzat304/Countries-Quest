@@ -4,9 +4,7 @@ async function fetchData() {
   const code = 8;
 
   try {
-    const response = await fetch(
-      "https://restcountries.com/v3.1/independent?status=true"
-    );
+    const response = await fetch("https://restcountries.com/v3.1/alpha/");
 
     if (!response.ok) {
       throw new Error("NOT OK");

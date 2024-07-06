@@ -1,35 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { IoIosSearch, IoIosArrowDown } from "react-icons/io";
 import Card from "../components/Card";
+import { Link } from "react-router-dom";
 
 const Home = ({ darkMode }) => {
   const [search, setSearch] = useState(""),
-   [codeArray, setCodeArray] = useState([]);
+    [codeArray, setCodeArray] = useState([]);
 
   const handleSearch = (e) => {
-    console.log(e.target.value);
     setSearch(e.target.value);
   };
 
   useEffect(() => {
     const listOfNums = [];
-    for (let i = 0;i<10;i++){
-      const randomNum = Math.ceil(Math.random() * 194)
-        if (listOfNums.includes(randomNum)){
-          i--;
-          continue
-        }
-        else {
-          listOfNums.push(randomNum);
-        }
+    for (let i = 0; i < 10; i++) {
+      const randomNum = Math.ceil(Math.random() * 194);
+      if (listOfNums.includes(randomNum)) {
+        i--;
+        continue;
+      } else {
+        listOfNums.push(randomNum);
+      }
     }
-    setCodeArray(listOfNums)
-  },[])
-
+    setCodeArray(listOfNums);
+  }, []);
 
   return (
     <section className={darkMode && "dark"}>
-      <div className="bg-vl-gray-lm min-h-lvh dark:bg-vd-blue px-10 pb-20">
+      <div className="min-h-lvh dark:bg-vd-blue px-20 pb-20 bg-vl-gray-lm shadow-inner">
         {/* -----------------Search and List-------------------- */}
         <div className="flex justify-between  pt-10">
           <div className="w-full flex relative">
@@ -62,7 +60,7 @@ const Home = ({ darkMode }) => {
         <div className="grid grid-flow-row grid-cols-5 gap-4 pt-8">
           {search === "" ? (
             codeArray.map(function (code) {
-              return <Card darkMode={darkMode} search={search} code={code} />;
+              return <Card darkMode={darkMode} code={code} />;
             })
           ) : (
             <Card darkMode={darkMode} search={search} />
