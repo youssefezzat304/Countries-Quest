@@ -21,6 +21,7 @@ const useFetch = (url, code = null, search = null, id = null) => {
           return response.json();
         })
         .then((data) => {
+          console.log(data[0])
           setLoading(false);
           const currencies = Object.values(data[0].currencies)[0],
             Languages = Object.values(data[0].languages).join(", "),

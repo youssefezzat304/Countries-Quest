@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
-
 //-------------- Components ----------
 import Card from "../components/Card";
-
+import SearchBar from "../components/SearchBar";
+import SelectMenu from "../components/SelectMenu";
 //-------------- Icons ---------------
 import { MoonLoader } from "react-spinners";
-import { IoIosSearch, IoIosArrowDown } from "react-icons/io";
+import ViewMoreBtn from "../components/ViewMoreBtn";
 
 const Home = ({ darkMode }) => {
   const [search, setSearch] = useState(""),
     [loading, setLoading] = useState(false),
+    [more, setMore] = useState(10),
     [codeArray, setCodeArray] = useState([]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
-
+  const viewMore = (e) => {
+    setMore(more + 10);
+  };
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -27,54 +30,33 @@ const Home = ({ darkMode }) => {
     const listOfNums = [];
     for (let i = 0; i < 10; i++) {
       const randomNum = Math.ceil(Math.random() * 193);
-      if (listOfNums.includes(randomNum)) {
+      if (codeArray.includes(randomNum) || listOfNums.includes(randomNum)) {
         i--;
         continue;
       } else {
         listOfNums.push(randomNum);
       }
     }
-    setCodeArray(listOfNums);
-  }, []);
+    setCodeArray([...codeArray, ...listOfNums]);
+    console.log(codeArray);
+  }, [more]);
 
   return (
     <section className={darkMode && "dark"}>
       <div className="min-h-lvh dark:bg-vd-blue px-20 pb-20 bg-vl-gray-lm shadow-inner">
+        
         {loading && (
           <div className="flex min-h-[91.6vh] dark:bg-vd-blue px-20 pb-20 bg-vl-gray-lm shadow-inner items-center justify-center">
             <MoonLoader />
           </div>
         )}
-        {/* -----------------Search and List-------------------- */}
-        <div className="flex justify-between  pt-10">
-          <div className="w-full flex relative">
-            <IoIosSearch className="self-center relative left-10 text-2xl text-d-gray-lm dark:text-white-txt" />
-            <input
-              type="search"
-              placeholder="Search for a country"
-              className="w-3/12 min-w-[300px] h-12 rounded-md pl-16 text-vd-blue-lm shadow-md dark:bg-d-blue dark:text-white-txt"
-              onChange={handleSearch}
-            />
-          </div>
-          <div className="flex">
-            <select
-              name="region-menu"
-              id=""
-              className="text-vd-blue-lm w-52 px-3 rounded-md shadow-md appearance-none cursor-pointer  dark:bg-d-blue dark:text-white-txt"
-            >
-              <option value="1">Filter by region</option>
-              <option value="2">Africa</option>
-              <option value="3">America</option>
-              <option value="4">Aisa</option>
-              <option value="4">Europe</option>
-              <option value="4">Oceania</option>
-            </select>
-            <IoIosArrowDown className="relative right-8 self-center text-xl cursor-pointer dark:text-white-txt" />
-          </div>
+
+        <div className="flex justify-between pt-10">
+          <SearchBar handleSearch={handleSearch} />
+          <SelectMenu />
         </div>
-        {/* ------------------------------------------------------ */}
-        {/*------------------ COUNTRIES-----------------------------*/}
-        <div className="grid grid-flow-row grid-cols-5 gap-4 pt-8">
+
+        <div className="grid items-center grid-flow-row grid-cols-1 gap-4 pt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {search === "" ? (
             codeArray.map(function (code) {
               return <Card darkMode={darkMode} code={code} />;
@@ -83,6 +65,9 @@ const Home = ({ darkMode }) => {
             <Card darkMode={darkMode} search={search} />
           )}
         </div>
+        {codeArray.length < 180 && search === "" && (
+          <ViewMoreBtn className="cursor-pointer" viewMore={viewMore} />
+        )}
       </div>
     </section>
   );
