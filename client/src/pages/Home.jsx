@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { IoIosSearch, IoIosArrowDown } from "react-icons/io";
+
+//-------------- Components ----------
 import Card from "../components/Card";
-import { Link } from "react-router-dom";
+
+//-------------- Icons ---------------
 import { MoonLoader } from "react-spinners";
+import { IoIosSearch, IoIosArrowDown } from "react-icons/io";
 
 const Home = ({ darkMode }) => {
   const [search, setSearch] = useState(""),
@@ -23,7 +26,7 @@ const Home = ({ darkMode }) => {
   useEffect(() => {
     const listOfNums = [];
     for (let i = 0; i < 10; i++) {
-      const randomNum = Math.ceil(Math.random() * 194);
+      const randomNum = Math.ceil(Math.random() * 193);
       if (listOfNums.includes(randomNum)) {
         i--;
         continue;
@@ -49,7 +52,7 @@ const Home = ({ darkMode }) => {
             <input
               type="search"
               placeholder="Search for a country"
-              className="w-3/12 min-w-[300px] h-12 rounded-md pl-16 text-vd-blue-lm shadow-md  dark:bg-d-blue dark:text-white-txt"
+              className="w-3/12 min-w-[300px] h-12 rounded-md pl-16 text-vd-blue-lm shadow-md dark:bg-d-blue dark:text-white-txt"
               onChange={handleSearch}
             />
           </div>

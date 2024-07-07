@@ -11,8 +11,6 @@ import Home from "./pages/Home";
 import Info from "./pages/Info";
 import { useState } from "react";
 
-
-
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 

@@ -1,35 +1,11 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const Card = ({ darkMode, search, code }) => {
-  const [country, setCountry] = useState({
-    flagPng: "",
-    name: "",
-    population: "",
-    region: "",
-    capital: "",
-  });
-
-  const url = `https://restcountries.com/v3.1/name/${search}`;
-  const all_url = "https://restcountries.com/v3.1/independent?status=true";
-
-  useEffect(() => {
-    fetch(search ? url : all_url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const res = search ? 0 : code;
-        setCountry({
-          flagPng: data[res].flags.png,
-          name: data[res].name.common,
-          population: data[res].population,
-          region: data[res].region,
-          capital: data[res].capital,
-        });
-      })
-      .catch((err) => console.log(err));
-  }, [code, search]);
+  const url_local = `https://restcountries.com/v3.1/name/${search}`,
+    url_general = "https://restcountries.com/v3.1/independent?status=true",
+    url = search ? url_local : url_general,
+    { country } = useFetch(url, code, search);
 
   return (
     <Link to={`/info/${country.name}`}>

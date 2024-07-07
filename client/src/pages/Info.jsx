@@ -1,52 +1,22 @@
 import React from "react";
-import { useState, useEffect } from "react";
+
+//------------------ Icons ----------------------
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
 import { MoonLoader } from "react-spinners";
 
+//--------------- Hooks -------------------
+import useFetch from "../hooks/useFetch";
+
 const Info = ({ darkMode }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
+  
+  const url = `https://restcountries.com/v3.1/name/${id}`,
+    search = null,
+    code = null;
 
-  const [country, setCountry] = useState({
-    flagPng: "",
-    name: "",
-    population: "",
-    region: "",
-    capital: "",
-    nativeName: "",
-    subRegion: "",
-    currencies: "",
-    languages: "",
-  });
-
-  const url = `https://restcountries.com/v3.1/name/${id}`;
-  useEffect(() => {
-    setLoading(true);
-    fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setLoading(false);
-        const currencies = Object.values(data[0].currencies)[0],
-          Languages = Object.values(data[0].languages).join(", "),
-          NativeName = Object.values(Object.values(data[0].name)[2])[0];
-        setCountry({
-          flagPng: data[0].flags.png,
-          name: data[0].name.common,
-          population: data[0].population,
-          region: data[0].region,
-          capital: data[0].capital,
-          nativeName: NativeName.official,
-          subRegion: data[0].subregion,
-          currencies: currencies.name,
-          languages: Languages,
-        });
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const { country, loading } = useFetch(url, code, search, id);
 
   return (
     <section className={darkMode && "dark"}>
@@ -72,7 +42,7 @@ const Info = ({ darkMode }) => {
               <img
                 src={country.flagPng}
                 alt=""
-                className="grow min-w-fit w-[38rem] shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px]"
+                className="grow min-w-fit w-[38rem] shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]"
               />
             </div>
 
